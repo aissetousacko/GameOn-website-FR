@@ -20,4 +20,9 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+//when the click on the (x), close the modal
+const modalClose = document.getElementsByClassName("close")[0];
+modalClose.onclick = function() {
+  modalbg.style.display = "none";
+}
 

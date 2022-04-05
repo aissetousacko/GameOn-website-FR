@@ -348,6 +348,10 @@ input[data-error]::after {
   background-color: #fff;
 }
 
+.error-messages {
+  color: red;
+}
+
 /* Style the arrow inside the select element: */
 .select-selected:after {
   position: absolute;

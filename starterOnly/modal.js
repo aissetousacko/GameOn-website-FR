@@ -12,14 +12,14 @@ const digitalRegex = /^([0-9]|[1-9][0-9])$/;
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 //error messages
-const errorMessages = {
+const errorMessagesList = {
   'firstName': "Veuillez entrer 2 caractères ou plus pour le prénom.", 
   'lastName': "Veuillez entrer 2 caractères ou plus pour le nom.",
-  'emailAddress': "Veuillez entrer une adresse email valide.",
-  'birthDate': "Vous devez avoir 1 an minimum pour participer.",
-  'participationOccurence': "Veuillez entrer une valeur comprise entre 0 et 99.",
-  'cityParticipation': "Veuillez sélectionner une ville.",
-  'terms': "Veuillez accepter les conditions d'utilisation.",
+  'email': "Veuillez entrer une adresse email valide.",
+  'birthdate': "Veuillez saisir une date valide.",
+  'quantity': "Veuillez entrer une valeur comprise entre 0 et 99.",
+  'location': "Veuillez sélectionner une ville.",
+  'cgu': "Veuillez accepter les conditions d'utilisation.",
 };
 
 // DOM Elements
@@ -42,14 +42,23 @@ const errorQuantity = document.getElementById("error-quantity");
 const errorLocation = document.getElementById("error-location");
 const errorCGU = document.getElementById("error-cgu");
 
-let firstnameValid = false;
+/* let firstnameValid = false;
 let lastnameValid = false;
 let emailValid = false;
 let birthdateValid = false;
 let quantityValid = false;
 let locationValid = false;
-let cguValid = false;
+let cguValid = false; */
 
+let validationStatus = {
+  firstnameValid: false,
+  lastnameValid: false,
+  emailValid: false,
+  birthdateValid: false,
+  quantityValid: false,
+  locationValid: false,
+  cguValid: false,
+};
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -69,93 +78,148 @@ modalClose.onclick = function() {
 //First Name validation
 firstName.addEventListener("input", function(e) {
   if(firstName.value == "" || firstName.value.length < 2) {
-    errorFirstname.innerText = "Veuillez saisir un prénom valide";
+    errorFirstname.innerText = errorMessagesList.firstName;
     //alert("le prenom doit etre saisit correctement!");
     console.log("verif prenom");
+    validationStatus.firstnameValid = false;
     e.preventDefault();
   }else {
     errorFirstname.innerText = "";
+    validationStatus.firstnameValid = true;
   }
-  firstnameValid = true;
+  /* firstnameValid = true; */
   console.log(firstName.value);
 })
 
 //Last Name validation
 lastName.addEventListener("input", function(e) {
   if(lastName.value == "" || lastName.value.length < 2) {
-    errorLastname.innerText = "Veuillez saisir un nom valide";
+    errorLastname.innerText = errorMessagesList.lastName;
     //alert("le prenom doit etre saisit correctement!");
     console.log("verif nom");
+    validationStatus.lastnameValid = false;
     e.preventDefault();
   }else {
     errorLastname.innerText = "";
+    validationStatus.lastnameValid = true;
   }
-  lastnameValid = true;
+  /* lastnameValid = true; */
   console.log(lastName.value);
 })
 
 //Email validation
 email.addEventListener("input", function(e) {
   if(email.value == "" || emailRegex.test(email.value) == false) {
-    errorEmail.innerText = "Veuillez saisir un email valide";
+    errorEmail.innerText = errorMessagesList.email;
     //alert("le prenom doit etre saisit correctement!");
     console.log("verif email");
+    validationStatus.emailValid = false;
     e.preventDefault();
   }else {
     errorEmail.innerText = "";
+    validationStatus.emailValid = true;
   }
-  emailValid = true;
+  /* emailValid = true; */
   console.log(email.value);
 })
 
 //Birth Date validation
 birthdate.addEventListener("input", function(e) {
   if(birthdate.value == "") {
-    errorBirthdate.innerText = "Veuillez saisir une date de naissance valide";
+    errorBirthdate.innerText = errorMessagesList.birthdate;
     //alert("le prenom doit etre saisit correctement!");
-    console.log("verif email");
+    console.log("verif birthdate");
+    validationStatus.birthdateValid = false;
     e.preventDefault();
   }else {
     errorBirthdate.innerText = "";
+    validationStatus.birthdateValid = true;
   }
-  birthdateValid = true;
+  /* birthdateValid = true; */
   console.log(birthdate.value);
 })
 
 //Quantity validation
 quantity.addEventListener("input", function(e) {
   if(quantity.value == "" || digitalRegex.test(quantity.value) == false) {
-    errorQuantity.innerText = "Veuillez saisir un nombre valide";
+    errorQuantity.innerText = errorMessagesList.quantity;
     //alert("le prenom doit etre saisit correctement!");
     console.log("verif quantity");
+    validationStatus.quantityValid = false;
     e.preventDefault();
   }else {
     errorQuantity.innerText = "";
+    validationStatus.quantityValid = true;
   }
-  quantityValid = true;
+  /* quantityValid = true; */
   console.log(quantity.value);
 })
 
-//City validation
-const city = document.querySelector("input[name='location']:checked");
-if(city == null) {
-  errorLocation.innerText = "Veuillez sélectionner une option";
-} else {
-  errorLocation.innerText = "";
-}
-locationValid = true;
-console.log(city.value);
-
-//CGU validation
-if(cgu.checked == false) {
-  errorCGU.innerText = "Veuillez accepter les conditions générales d'utilisation";
-}else {
-  errorCGU.innerText = "";
-}
 
 //validation of the form
 form.addEventListener("submit", function(e) {
   e.preventDefault();
+  /* validate(); */
+
+  //Location validation
+  const city = document.querySelector("input[name='location']:checked");
+  if(city == null) {
+    errorLocation.innerText = errorMessagesList.location;
+    console.log("verif city");
+    validationStatus.locationValid = false;
+  } else {
+    errorLocation.innerText = "";
+    validationStatus.locationValid = true;
+  }
+  console.log(city.value);
+
+  /* const cities = document.querySelectorAll("input[name='location']");
+  cities.forEach(city => city.addEventListener("change", function(e) {
+    if(city == null){
+      errorLocation.innerText = errorMessagesList.location;
+      console.log("verif city");
+      validationStatus.locationValid = false;
+    } else {
+      errorLocation.innerText = "";
+      validationStatus.locationValid = true;
+    }
+    console.log(city.value);
+  })) */
+
+  //CGU validation
+  cgu.addEventListener("change", function(e) {
+    console.log(cgu.checked);
+    if(cgu.checked == true) {
+      errorCGU.innerText = "";
+      console.log("verif cgu");
+      validationStatus.cguValid = true;
+    }else {
+      errorCGU.innerText = errorMessagesList.cgu;
+      validationStatus.cguValid = false;
+    }
+    console.log("checked");
+  })
+
+  let result = false;
+  for(let valid in validationStatus) {
+    if(validationStatus[valid] == true) {
+      result = true;
+    } else {
+      result = false;
+    }
+  }
+  console.log(validationStatus);
+  console.log(result)
+  
+  if(result == true) {
+    //alert("merci");
+    form.style.visibility = "hidden";
+    document.getElementById("success-msg").innerText = "Merci !";
+  } else{
+    alert("ce n'est pas bon");
+  }
+
+
   //on valide le form avec les valeurs true/false attribué aux input
   /* if(firstName.value == "" || firstName.length < 2) {
     
@@ -192,9 +256,36 @@ form.addEventListener("submit", function(e) {
   }
   console.log(city.value); */
 
-  if(cgu.checked == false) {
-    alert("la case n'a pas été cochée")
-  }
+  //City validation
+  //essayer de faire une boucle qui parcourt tous les boutons radios
   
-  console.log("submit");
+
+  /* if(cgu.checked == false) {
+    errorCGU.innerText = ""
+    alert("la case n'a pas été cochée");
+    validationStatus.cguValid = false;
+  }else {
+    validationStatus.cguValid = true;
+  } */
+  
+  /* console.log("submit"); */
 })
+
+/* function validate() {
+  //On vérifie si toutes les valeurs sont valides
+  console.log('click');
+  let result = false;
+  for(let valid in validationStatus) {
+    if(validationStatus[valid] == true) {
+      result = true;
+    } else {
+      return false;
+    }
+  }
+
+  if(result == true) {
+    alert("formualaire valide")
+  } else {
+    return false;
+  }
+} */

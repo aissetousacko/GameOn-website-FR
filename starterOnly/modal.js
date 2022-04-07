@@ -42,13 +42,6 @@ const errorQuantity = document.getElementById("error-quantity");
 const errorLocation = document.getElementById("error-location");
 const errorCGU = document.getElementById("error-cgu");
 
-/* let firstnameValid = false;
-let lastnameValid = false;
-let emailValid = false;
-let birthdateValid = false;
-let quantityValid = false;
-let locationValid = false;
-let cguValid = false; */
 
 let validationStatus = {
   firstnameValid: false,
@@ -79,15 +72,11 @@ modalClose.onclick = function() {
 firstName.addEventListener("input", function(e) {
   if(firstName.value == "" || firstName.value.length < 2) {
     errorFirstname.innerText = errorMessagesList.firstName;
-    //alert("le prenom doit etre saisit correctement!");
-    console.log("verif prenom");
     validationStatus.firstnameValid = false;
-    e.preventDefault();
   }else {
     errorFirstname.innerText = "";
     validationStatus.firstnameValid = true;
   }
-  /* firstnameValid = true; */
   console.log(firstName.value);
 })
 
@@ -95,47 +84,35 @@ firstName.addEventListener("input", function(e) {
 lastName.addEventListener("input", function(e) {
   if(lastName.value == "" || lastName.value.length < 2) {
     errorLastname.innerText = errorMessagesList.lastName;
-    //alert("le prenom doit etre saisit correctement!");
-    console.log("verif nom");
     validationStatus.lastnameValid = false;
-    e.preventDefault();
   }else {
     errorLastname.innerText = "";
     validationStatus.lastnameValid = true;
   }
-  /* lastnameValid = true; */
   console.log(lastName.value);
 })
 
 //Email validation
 email.addEventListener("input", function(e) {
-  if(email.value == "" || emailRegex.test(email.value) == false) {
+  if(email.value.length == 0 || emailRegex.test(email.value) == false) {
     errorEmail.innerText = errorMessagesList.email;
-    //alert("le prenom doit etre saisit correctement!");
-    console.log("verif email");
     validationStatus.emailValid = false;
-    e.preventDefault();
   }else {
     errorEmail.innerText = "";
     validationStatus.emailValid = true;
   }
-  /* emailValid = true; */
   console.log(email.value);
 })
 
 //Birth Date validation
 birthdate.addEventListener("input", function(e) {
-  if(birthdate.value == "") {
+  if(birthdate.value == "" || digitalRegex.test(birthdate.value)) {
     errorBirthdate.innerText = errorMessagesList.birthdate;
-    //alert("le prenom doit etre saisit correctement!");
-    console.log("verif birthdate");
     validationStatus.birthdateValid = false;
-    e.preventDefault();
   }else {
     errorBirthdate.innerText = "";
     validationStatus.birthdateValid = true;
   }
-  /* birthdateValid = true; */
   console.log(birthdate.value);
 })
 
@@ -143,15 +120,11 @@ birthdate.addEventListener("input", function(e) {
 quantity.addEventListener("input", function(e) {
   if(quantity.value == "" || digitalRegex.test(quantity.value) == false) {
     errorQuantity.innerText = errorMessagesList.quantity;
-    //alert("le prenom doit etre saisit correctement!");
-    console.log("verif quantity");
     validationStatus.quantityValid = false;
-    e.preventDefault();
   }else {
     errorQuantity.innerText = "";
     validationStatus.quantityValid = true;
   }
-  /* quantityValid = true; */
   console.log(quantity.value);
 })
 
@@ -187,7 +160,18 @@ form.addEventListener("submit", function(e) {
   })) */
 
   //CGU validation
-  cgu.addEventListener("change", function(e) {
+  //console.log(cgu.checked);
+  if(cgu.checked == true) {
+    errorCGU.innerText = "";
+    validationStatus.cguValid = true;
+  } else {
+    errorCGU.innerText = errorMessagesList.cgu;
+    console.log("verif cgu");
+    validationStatus.cguValid = false;
+  }
+  console.log("checked");
+
+  /* cgu.addEventListener("change", function(e) {
     console.log(cgu.checked);
     if(cgu.checked == true) {
       errorCGU.innerText = "";
@@ -198,7 +182,7 @@ form.addEventListener("submit", function(e) {
       validationStatus.cguValid = false;
     }
     console.log("checked");
-  })
+  }) */
 
   let result = false;
   for(let valid in validationStatus) {
@@ -206,6 +190,7 @@ form.addEventListener("submit", function(e) {
       result = true;
     } else {
       result = false;
+      break;
     }
   }
   console.log(validationStatus);

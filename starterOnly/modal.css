@@ -350,6 +350,8 @@ input[data-error]::after {
 
 .error-messages {
   color: red;
+  font-size: 20px;
+  display: block;
 }
 
 #success-msg {

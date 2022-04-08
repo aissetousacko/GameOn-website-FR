@@ -33,6 +33,7 @@ const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 const cgu = document.getElementById("checkbox1");
+const successModal = document.getElementById("success__validation");
 
 const errorFirstname = document.getElementById("error-firstname");
 const errorLastname = document.getElementById("error-lastname");
@@ -198,79 +199,16 @@ form.addEventListener("submit", function(e) {
   
   if(result == true) {
     //alert("merci");
-    form.style.visibility = "hidden";
-    document.getElementById("success-msg").innerText = "Merci !";
+    form.style.display = "none";
+    successModal.style.display = "block";
   } else{
     alert("ce n'est pas bon");
   }
-
-
-  //on valide le form avec les valeurs true/false attribué aux input
-  /* if(firstName.value == "" || firstName.length < 2) {
-    
-    alert("le prenom doit etre saisit correctement!");
-    console.log("verif");
-    e.preventDefault();
-  }
-  console.log(firstName.value); */
-
-  /* if(lastName.value == "" || lastName.length < 2) {
-    alert("le nom doit etre saisit correctement!");
-    console.log("verif");
-    e.preventDefault();
-  }
-  console.log(lastName.value); */
-
-  /* if(email.value == "" || emailRegex.test(email.value) == false) {
-    console.log('email.value');
-    alert (" Veuillez saisir une adresse mail valide");
-    e.preventDefault();
-  }
-  console.log(email.value); */
-
-  /* if(quantity.value == "" || digitalRegex.test(quantity.value) == false) {
-    alert(' veuillez entrer un nombre valide');
-    e.preventDefault();
-  }
-  console.log(quantity.value); */
-
-  /* const city = document.querySelector("input[name='location']:checked");
-  if(city == null) {
-    alert("veuillez saisir une location");
-    e.preventDefault();
-  }
-  console.log(city.value); */
-
-  //City validation
-  //essayer de faire une boucle qui parcourt tous les boutons radios
   
-
-  /* if(cgu.checked == false) {
-    errorCGU.innerText = ""
-    alert("la case n'a pas été cochée");
-    validationStatus.cguValid = false;
-  }else {
-    validationStatus.cguValid = true;
-  } */
-  
-  /* console.log("submit"); */
 })
 
-/* function validate() {
-  //On vérifie si toutes les valeurs sont valides
-  console.log('click');
-  let result = false;
-  for(let valid in validationStatus) {
-    if(validationStatus[valid] == true) {
-      result = true;
-    } else {
-      return false;
-    }
-  }
-
-  if(result == true) {
-    alert("formualaire valide")
-  } else {
-    return false;
-  }
-} */
+//When the user click on the button "Fermer", close the modal
+const successModalClose = document.getElementById("success__close");
+successModalClose.onclick = function() {
+  modalbg.style.display = "none";
+}

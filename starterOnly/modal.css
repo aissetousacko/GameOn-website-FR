@@ -74,9 +74,6 @@ img {
     float: right;
     display: block;
   }
-}
-
-@media screen and (max-width: 768px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -90,9 +87,7 @@ img {
   }
 }
 
-
-
- @media screen and (max-width: 540px) {
+@media screen and (max-width: 540px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
@@ -322,7 +317,8 @@ input[data-error]::after {
   transform: rotate(-45deg);
 }
 .btn-submit,
-.btn-signup {
+.btn-signup,
+.btn-close {
   background: #fe142f;
   display: block;
   margin: 0 auto;
@@ -333,6 +329,17 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+
+#success__validation {
+  display: none;
+}
+
+#success__msg {
+  margin: 315px 50px;
+  text-align: center;
+  font-size: 30px;
+}
+
 /* custom select styles */
 .custom-select {
   position: relative;

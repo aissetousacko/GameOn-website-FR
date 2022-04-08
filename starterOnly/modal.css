@@ -46,12 +46,11 @@ img {
 
 .main-navbar {
   float: right;
-  position: absolute;
+  /* position: absolute;
   right: 40px;
-  /* top: 45px; */
   z-index: 10;
   background: white;
-  border-radius: 15px;
+  border-radius: 15px; */
 }
 .topnav a {
   float: left;
@@ -371,7 +370,7 @@ input[data-error]::after {
 
 .error-messages {
   color: red;
-  font-size: 20px;
+  font-size: 15px;
   display: block;
 }
 

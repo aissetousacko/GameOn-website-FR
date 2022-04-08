@@ -13,13 +13,13 @@ const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 //error messages
 const errorMessagesList = {
-  'firstName': "Veuillez entrer 2 caractères ou plus pour le prénom.", 
-  'lastName': "Veuillez entrer 2 caractères ou plus pour le nom.",
-  'email': "Veuillez entrer une adresse email valide.",
-  'birthdate': "Veuillez saisir une date valide.",
-  'quantity': "Veuillez entrer une valeur comprise entre 0 et 99.",
-  'location': "Veuillez sélectionner une ville.",
-  'cgu': "Veuillez accepter les conditions d'utilisation.",
+  firstName: "Veuillez entrer 2 caractères ou plus pour le prénom.", 
+  lastName: "Veuillez entrer 2 caractères ou plus pour le nom.",
+  email: "Veuillez entrer une adresse email valide.",
+  birthdate: "Veuillez saisir une date valide.",
+  quantity: "Veuillez entrer une valeur comprise entre 0 et 99.",
+  location: "Veuillez sélectionner une ville.",
+  cgu: "Veuillez accepter les conditions d'utilisation.",
 };
 
 // DOM Elements
@@ -95,7 +95,7 @@ lastName.addEventListener("input", function(e) {
 
 //Email validation
 email.addEventListener("input", function(e) {
-  if(email.value.length == 0 || emailRegex.test(email.value) == false) {
+  if(email.value == "" || emailRegex.test(email.value) == false) {
     errorEmail.innerText = errorMessagesList.email;
     validationStatus.emailValid = false;
   }else {
@@ -107,7 +107,9 @@ email.addEventListener("input", function(e) {
 
 //Birth Date validation
 birthdate.addEventListener("input", function(e) {
-  if(birthdate.value == "" || digitalRegex.test(birthdate.value)) {
+  console.log("erreur date")
+  if(birthdate.value == "" ) {
+    console.log("erreur date de naissance")
     errorBirthdate.innerText = errorMessagesList.birthdate;
     validationStatus.birthdateValid = false;
   }else {
@@ -134,6 +136,14 @@ quantity.addEventListener("input", function(e) {
 form.addEventListener("submit", function(e) {
   e.preventDefault();
   /* validate(); */
+
+  if(firstName.value == "" || firstName.value.length < 2) {
+    errorFirstname.innerText = errorMessagesList.firstName;
+    validationStatus.firstnameValid = false;
+  }else {
+    errorFirstname.innerText = "";
+    validationStatus.firstnameValid = true;
+  }
 
   //Location validation
   const city = document.querySelector("input[name='location']:checked");
@@ -203,9 +213,29 @@ form.addEventListener("submit", function(e) {
     successModal.style.display = "block";
   } else{
     alert("ce n'est pas bon");
+    /* for(msg-error in errorMessagesList) {
+      if(validationStatus[valid] == true) {
+        result = true;
+      } else {
+        result = false;
+        break;
+      }
+    } */
   }
   
 })
+
+/* function errorMessages(validationStatus) {
+  switch (validationStatus) {
+    case :
+      
+      break;
+  
+    default:
+      break;
+  }
+} */
+
 
 //When the user click on the button "Fermer", close the modal
 const successModalClose = document.getElementById("success__close");

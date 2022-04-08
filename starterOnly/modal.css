@@ -17,7 +17,7 @@ body {
   background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
-  max-width: 1300px;
+  /* max-width: 1300px; */
   margin: 0 auto;
 }
 
@@ -31,14 +31,27 @@ img {
 }
 
 .topnav {
-  overflow: hidden;
+  /* overflow: hidden; */
   margin: 3.5%;
+  display: flex;
+  justify-content: space-between;
 }
 .header-logo {
     float: left;
 }
+
+.logo {
+  width: 60%;
+}
+
 .main-navbar {
-    float: right;
+  float: right;
+  position: absolute;
+  right: 40px;
+  /* top: 45px; */
+  z-index: 10;
+  background: white;
+  border-radius: 15px;
 }
 .topnav a {
   float: left;
@@ -46,7 +59,7 @@ img {
   color: #000000;
   text-align: center;
   padding: 12px 12px;
-  margin: 5px;
+  /* margin: 5px; */
   text-decoration: none;
   font-size: 20px;
   font-family: Roboto, sans-serif;
@@ -68,7 +81,8 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+
+@media screen and (max-width: 1023px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
@@ -439,7 +453,7 @@ input[data-error]::after {
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 424px;
+  /* min-width: 424px; */
 }
 .hero-content::after {
   content: "";
@@ -460,7 +474,7 @@ input[data-error]::after {
   white-space: nowrap;
 }
 .hero-text {
-  width: 146%;
+  width: 100%;
   font-weight: normal;
   margin-top: 57px;
   padding: 0;
@@ -514,12 +528,12 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
     white-space: normal;
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   .hero-img img {
     border-radius: 10px;
@@ -533,6 +547,10 @@ footer {
   .copyrights {
     margin-top: 50px;
     text-align: center;
+  }
+
+  #success__msg {
+    margin: 200px 50px;
   }
 }
 

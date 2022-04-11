@@ -79,6 +79,8 @@
                   type="text"
                   id="last"
                   name="last"
+                  oninput="hideError(this.parentNode, this);"
+                  onblur="hideError(this.parentNode, this);"
                 /><br />
                 <span id="error-lastname" class="error-messages"></span>
               </div>
@@ -90,6 +92,8 @@
                   type="email"
                   id="email"
                   name="email"
+                  oninput="hideError(this.parentNode, this);"
+                  onblur="hideError(this.parentNode, this);"
                 /><br />
                 <span id="error-email" class="error-messages"></span>
               </div>
@@ -101,6 +105,8 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
+                  oninput="hideError(this.parentNode, this);"
+                  onblur="hideError(this.parentNode, this);"
                 /><br />
                 <span id="error-birthdate" class="error-messages"></span>
               </div>
@@ -116,6 +122,8 @@
                   name="quantity"
                   min="0"
                   max="99"
+                  oninput="hideError(this.parentNode, this);"
+                  onblur="hideError(this.parentNode, this);"
                 />
                 <span id="error-quantity" class="error-messages"></span>
               </div>

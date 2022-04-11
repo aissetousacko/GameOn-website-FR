@@ -11,7 +11,7 @@ function editNav() {
 //regex
 const digitalRegex = /^([0-9]|[1-9][0-9])$/;
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
+const birthdateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
 //error messages
 // const errorMessagesList = {
 //   firstName: 'Veuillez entrer 2 caractères ou plus pour le prénom.',
@@ -92,7 +92,82 @@ const FORMS = {
       return true;
     },
     error: undefined
-  }
+  },
+  last: {
+    inputElement: form.querySelector('#last'),
+    getInputValue: input => input.value,
+    formatValue: value => (Boolean(value.length) ? value : null),
+    isValidateInput: value => {
+      if (!Boolean(value)) return 'Ce champ est obligatoire';
+      if (Boolean(value.length < 2))
+        return 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+      return true;
+    },
+    error: undefined
+  },
+  email: {
+    inputElement: form.querySelector('#last'),
+    getInputValue: input => input.value,
+    formatValue: value => (Boolean(value.length) ? value : null),
+    isValidateInput: value => {
+      if (!Boolean(value)) return 'Ce champ est obligatoire';
+      if (!Boolean(emailRegex.test(email.value)))
+        return 'Veuillez entrer une adresse mail valide.';
+      return true;
+    },
+    error: undefined
+  },
+  birthdate: {
+    inputElement: form.querySelector('#birthdate'),
+    getInputValue: input => input.value,
+    formatValue: value => (Boolean(value.length) ? value : null),
+    isValidateInput: value => {
+      if (!Boolean(value)) return 'Ce champ est obligatoire';
+      /* if (!Boolean(birthdateRegex.test(value)))
+        return 'Veuillez entrer une date valide.'; */
+      return true;
+    },
+    error: undefined
+  },
+  quantity: {
+    inputElement: form.querySelector('#quantity'),
+    getInputValue: input => input.value,
+    formatValue: value => (Boolean(value.length) ? value : null),
+    isValidateInput: value => {
+      if (!Boolean(value)) return 'Ce champ est obligatoire';
+      if (!Boolean(digitalRegex.test(quantity.value)))
+        return 'Veuillez entrer un nombre valide.';
+      return true;
+    },
+    error: undefined
+  },
+  location: {
+    inputElement: form.querySelectorAll('input[name="location"]'),
+    getInputValue: input => {
+      for(let element of input) {
+        if(element.checked) {
+          return element.value;
+          break;
+        }
+      }
+    },
+    formatValue: value => (Boolean(value.length) ? value : null),
+    isValidateInput: value => {
+      if (!Boolean(value)) return 'Ce champ est obligatoire';
+      return true;
+    },
+    error: undefined
+  },
+  /* cgu: {
+    inputElement: form.querySelector('#checkbox1'),
+    getInputValue: input => input.value,
+    formatValue: value => (Boolean(value.checked) ? value : null),
+    isValidateInput: value => {
+      if (!Boolean(value)) return 'Ce champ est obligatoire';
+      return true;
+    },
+    error: undefined
+  } */
 };
 
 /**
@@ -102,11 +177,13 @@ const FORMS = {
 function getFormsData() {
   const jsonData = {};
   Object.keys(FORMS).forEach(id => {
+    //tableau contenant les clés de FORMS
     const inputHelpers = FORMS[id];
 
     if (inputHelpers.inputElement !== undefined) {
+      let inputHelpersValue = inputHelpers.getInputValue(inputHelpers.inputElement);
       jsonData[id] = inputHelpers.formatValue(
-        inputHelpers.getInputValue(inputHelpers.inputElement)
+        inputHelpersValue
       );
     }
   });
@@ -130,6 +207,7 @@ function getFormsData() {
 function isValid(inputName, inputValue) {
   const inputHelpers = FORMS[inputName];
 
+  //permet de vérifier s'il y a une erreur et la renvoie
   const isValidOrIsError = inputHelpers
     ? inputHelpers.isValidateInput(inputValue)
     : true;
@@ -149,9 +227,9 @@ function validateInput(data) {
   const valids = keys.map(key => isValid(key, data[key]));
 
   const errors = valids
-    .map((v, i) => (v ? 'true' : i))
-    .filter(v => v !== 'true')
-    .map(idx => keys[idx]);
+    .map((val, i) => (val ? 'true' : i))
+    .filter(val => val !== 'true')
+    .map(index => keys[index]);
 
   return Boolean(errors.length === 0);
 }
@@ -168,7 +246,11 @@ function validateInput(data) {
 function showError(formData, input) {
   const inputHelpers = FORMS[input.id];
 
-  if (Boolean(inputHelpers.error)) formData.dataset.errorVisible = 'true';
+  if (Boolean(inputHelpers.error)) {
+    //dans l'attribut de données dataset, on définit une valeur errorVisible qui renvoie true s'il y a une erreur
+    formData.dataset.errorVisible = 'true';
+  }
+  //dans l'attribut de données dataset, on définit une valeur error qui affiche le message d'erreur
   formData.dataset.error = inputHelpers.error || formData.dataset.error;
 }
 /** Hide error (after doing a re-validate, or when forced) for given formData & input-like
@@ -188,13 +270,7 @@ function hideError(formData, input, force = false) {
   delete formData.dataset.errorVisible;
   delete formData.dataset.error;
 
-  if (
-    force !== true &&
-    !isValid(
-      input.id,
-      inputHelpers.formatValue(inputHelpers.getInputValue(input))
-    )
-  ) {
+  if (force !== true && !isValid(input.id, inputHelpers.formatValue(inputHelpers.getInputValue(input)))) {
     console.log('really on error');
     showError(formData, input);
   }
@@ -207,23 +283,30 @@ function hideError(formData, input, force = false) {
  * @param [event] - The event object that is passed to the function.
  */
 function submit(event = undefined) {
-  if (event) event.preventDefault();
+  event.preventDefault();
 
   const data = getFormsData();
   const formValidation = validateInput(data);
 
+  console.log("click submit");
   if (Boolean(formValidation)) {
     // Here you can call success message
+    console.log("submit");
+    form.style.display = "none";
+    successModal.style.display = "block";
   } else {
     form.checkValidity();
+    console.log("error");
   }
 }
 
 /***[ EVENTS BINDING ]***
  ************************/
 form.addEventListener('submit', submit, false);
+
 // launch modal event
 modalBtn.forEach(btn => btn.addEventListener('click', launchModal));
+
 // launch modal form
 function launchModal() {
   modalbg.style.display = 'block';

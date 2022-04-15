@@ -1,3 +1,4 @@
+//Display the icon from the menu
 function editNav() {
   var x = document.getElementById('myTopnav');
   if (x.className === 'topnav') {
@@ -7,11 +8,12 @@ function editNav() {
   }
 }
 
-//regex
+// Regex
 const digitalRegex = /^([0-9]|[1-9][0-9])$/;
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const birthdateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-//error messages
+
+// Error messages list
 const errorMessagesList = {
   first: 'Veuillez entrer 2 caractères ou plus pour le prénom.',
   last: 'Veuillez entrer 2 caractères ou plus pour le nom.',
@@ -28,36 +30,22 @@ const modalBtn = document.querySelectorAll('.modal-btn');
 const modalClose = document.getElementsByClassName('close')[0];
 const formData = document.querySelectorAll('.formData');
 const form = document.querySelector('#reserve-form');
-/* const firstName = document.getElementById('first'); */
-/* const lastName = document.getElementById('last');
-const email = document.getElementById('email'); */
-/* const birthdate = document.getElementById('birthdate'); */
-/* const quantity = document.getElementById('quantity'); */
-/* const cgu = document.getElementById('checkbox1'); */
 const successModal = document.getElementById('success__validation');
 const successModalClose = document.getElementById('success__close');
-let formSuccess = true;
 
-const errorFirstname = document.querySelector('error-messages');
-/* const errorLastname = document.getElementById('error-lastname');
-const errorEmail = document.getElementById('error-email');
-const errorBirthdate = document.getElementById('error-birthdate');
-const errorQuantity = document.getElementById('error-quantity');
-const errorLocation = document.getElementById('error-location');
-const errorCGU = document.getElementById('error-cgu'); */
-
-
+// Show error messages
 function showError(inputName, inputElement) {
   inputElement.closest('.formData').dataset.errorVisible = 'true';
   inputElement.closest('.formData').dataset.error = errorMessagesList[inputName];
 }
 
+// Hide error messages
 function hideError(inputElement) {
   delete inputElement.closest('.formData').dataset.errorVisible;
   delete inputElement.closest('.formData').dataset.error;
 }
 
-
+// Validation of the input for the firstname and lastname fields
 const inputTextValidation = (inputName) => {
   const inputElement = document.getElementById(inputName);
   if(inputElement.value == "" || inputElement.value.length < 2) {
@@ -67,6 +55,7 @@ const inputTextValidation = (inputName) => {
   }
 }
 
+// Validation of the input for the email field
 const inputEmailValidation = (inputName) => {
   const inputElement = document.getElementById(inputName);
   if(inputElement.value == "" || !emailRegex.test(inputElement.value)) {
@@ -76,6 +65,7 @@ const inputEmailValidation = (inputName) => {
   }
 }
 
+// Validation of the input for the birthdate field
 const inputBirthdateValidation = (inputName) => {
   const inputElement = document.getElementById(inputName);
   if(inputElement.value == "" || birthdateRegex.test(inputElement.value)) {
@@ -85,6 +75,7 @@ const inputBirthdateValidation = (inputName) => {
   }
 }
 
+// Validation of the input for the quantity field
 const inputQuantityValidation = (inputName) => {
   const inputElement = document.getElementById(inputName);
   if(inputElement.value == "" || !digitalRegex.test(inputElement.value)) {
@@ -94,6 +85,7 @@ const inputQuantityValidation = (inputName) => {
   }
 }
 
+// Validation of the input for the location fields
 const inputRadioValidation = (inputName) => {
   const radioElements = document.querySelectorAll("input[name=" + inputName + "]");
   for(let element of radioElements) {
@@ -106,6 +98,7 @@ const inputRadioValidation = (inputName) => {
   }
 }
 
+// Validation of the input for the checkbox
 const inputCheckboxValidation = (inputName) => {
   const inputElement = document.getElementById(inputName);
   if(!inputElement.checked) {
@@ -116,6 +109,7 @@ const inputCheckboxValidation = (inputName) => {
   console.log(inputElement.checked);
 }
 
+// Check if the form is valid
 function formIsValid() {
   let isValid = true;
   for(let errorAttribute of formData) {
@@ -131,6 +125,7 @@ function formIsValid() {
   }
 }
 
+// Validation of all the inputs and ckeck the form validation
 function validation() {
 
   inputTextValidation("first");
@@ -144,6 +139,7 @@ function validation() {
   formIsValid();
 }
 
+// Form validation when the user click on the button submit
 form.addEventListener('submit', function(e) {
   e.preventDefault();
   validation();
@@ -154,6 +150,8 @@ modalBtn.forEach(btn => btn.addEventListener('click', launchModal));
 
 // launch modal form
 function launchModal() {
+  successModal.style.display = "none";
+  form.style.display = "block";
   modalbg.style.display = 'block';
   const firstInput = form.querySelector('input');
   firstInput.focus();
@@ -167,4 +165,5 @@ modalClose.onclick = function () {
 //When the user click on the button "Fermer", close the modal
 successModalClose.onclick = function () {
   modalbg.style.display = 'none';
+  form.reset();
 };

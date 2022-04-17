@@ -41,7 +41,7 @@ img {
 }
 
 .logo {
-  width: 60%;
+  width: 100%;
 }
 
 .main-navbar {
@@ -60,7 +60,7 @@ img {
   padding: 12px 12px;
   /* margin: 5px; */
   text-decoration: none;
-  font-size: 20px;
+  font-size: 19px;
   font-family: Roboto, sans-serif;
 }
 
@@ -87,6 +87,7 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
+    margin-left: 45%;
   }
   .topnav.responsive {
     position: relative;
@@ -110,7 +111,6 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
   }
 }
 
@@ -357,7 +357,7 @@ input[data-error]::after {
 }
 
 #success__msg {
-  margin: 315px 50px;
+  margin: 275px 50px;
   text-align: center;
   font-size: 30px;
 }
@@ -536,7 +536,7 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 3.5rem;
+    font-size: 50px;
     white-space: normal;
   }
   .hero-text {

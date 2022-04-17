@@ -162,7 +162,7 @@ modalClose.onclick = function () {
   modalbg.style.display = 'none';
 };
 
-//When the user click on the button "Fermer", close the modal
+//When the user click on the button "Fermer", close the modal and reset the form
 successModalClose.onclick = function () {
   modalbg.style.display = 'none';
   form.reset();

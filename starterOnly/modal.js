@@ -106,26 +106,15 @@ const inputCheckboxValidation = (inputName) => {
   } else {
     hideError(inputElement);
   }
-  console.log(inputElement.checked);
+  //console.log(inputElement.checked);
 }
 
 // Check if the form is valid
 function formIsValid() {
-  let isValid = true;
-  for(let errorAttribute of formData) {
-    if(errorAttribute.getAttribute("data-error")) {
-      isValid = false;
-    }
-  }
-
-  if(isValid) {
-    console.log("submit");
-    form.style.display = "none";
-    successModal.style.display = "block";
-  }
+  
 }
 
-// Validation of all the inputs and ckeck the form validation
+// Validation of all the inputs and ckeck if the form is valid
 function validation() {
 
   inputTextValidation("first");
@@ -136,7 +125,18 @@ function validation() {
   inputRadioValidation("location");
   inputCheckboxValidation('checkbox1');
   
-  formIsValid();
+  let isValid = true;
+  for(let errorAttribute of formData) {
+    if(errorAttribute.getAttribute("data-error")) {
+      isValid = false;
+    }
+  }
+
+  if(isValid) {
+    //console.log("submit");
+    form.style.display = "none";
+    successModal.style.display = "block";
+  }
 }
 
 // Form validation when the user click on the button submit

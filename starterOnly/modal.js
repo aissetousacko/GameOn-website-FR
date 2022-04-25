@@ -109,11 +109,6 @@ const inputCheckboxValidation = (inputName) => {
   //console.log(inputElement.checked);
 }
 
-// Check if the form is valid
-function formIsValid() {
-  
-}
-
 // Validation of all the inputs and ckeck if the form is valid
 function validation() {
 

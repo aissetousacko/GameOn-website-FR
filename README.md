@@ -1,5 +1,19 @@
-# Projet GameOn
-1. Forkez ce repo ;
-2. Il est conseillé d'utiliser VisualStudio Code et vous pouvez utiliser Docker, mais ce n'est pas obligatoire ;
-3. Il n'y a aucune dépendance ;
-4. Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.
+<p align=center>
+  <img src="/starterOnly/Logo.png" alt="Logo GameOn" />
+</p>
+
+
+## General infos
+GameOn is a site who specialized in conferences and games competitions. This project focuses on fixing issues in the form.
+
+
+
+## Technologies
+This project is created with : 
+* HTML
+* CSS
+* Javascript
+
+
+## Sources
+This project is a study project carried out with Openclassrooms

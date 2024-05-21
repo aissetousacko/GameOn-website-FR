@@ -3,7 +3,7 @@
 </p>
 
 
-## General infos
+## Presentation
 GameOn is a site who specialized in conferences and games competitions. This project focuses on fixing issues in the form.
 
 

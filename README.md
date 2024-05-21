@@ -15,5 +15,5 @@ This project is created with :
 * Javascript
 
 
-## Sources
-This project is a study project carried out with Openclassrooms
+## Author
+Aïssetou SACKO - This project is a study project carried out with Openclassrooms
